@@ -211,6 +211,3 @@ def print_grads(grads):
     print ("db1 = "+ str(grads["db1"]))
     print ("dA1 = "+ str(grads["dA2"])) # this is done on purpose to be consistent with lecture where we normally start with A0
                                         # in this implementation we started with A1, hence we bump it up by 1. 
-    
-    
-    
