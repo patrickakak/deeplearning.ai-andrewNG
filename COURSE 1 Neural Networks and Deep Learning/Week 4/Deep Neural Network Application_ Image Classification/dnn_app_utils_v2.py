@@ -267,7 +267,7 @@ def compute_cost(AL, Y):
     m = Y.shape[1]
 
     # Compute loss from aL and y.
-    cost = (1./m) * (-np.dot(Y,np.log(AL).T) - np.dot(1-Y, np.log(1-AL).T))
+    cost = (1./m) * (-np.dot(Y, np.log(AL).T) - np.dot(1-Y, np.log(1-AL).T))
     
     cost = np.squeeze(cost)  # To make sure your cost's shape is what we expect (e.g. this turns [[17]] into 17).
     assert(cost.shape == ())
@@ -291,9 +291,9 @@ def linear_backward(dZ, cache):
     A_prev, W, b = cache
     m = A_prev.shape[1]
 
-    dW = 1./m * np.dot(dZ,A_prev.T)
+    dW = 1./m * np.dot(dZ, A_prev.T)
     db = 1./m * np.sum(dZ, axis=1, keepdims=True)
-    dA_prev = np.dot(W.T,dZ)
+    dA_prev = np.dot(W.T, dZ)
     
     assert (dA_prev.shape == A_prev.shape)
     assert (dW.shape == W.shape)
@@ -442,7 +442,7 @@ def print_mislabeled_images(classes, X, y, p):
     for i in range(num_images):
         index = mislabeled_indices[1][i]
         
-        plt.subplot(2, num_images, i + 1)
+        plt.subplot(2, num_images, i+1)
         plt.imshow(X[:,index].reshape(64,64,3), interpolation='nearest')
         plt.axis('off')
         plt.title("Prediction: " + classes[int(p[0,index])].decode("utf-8") + " \n Class: " + classes[y[0,index]].decode("utf-8"))
