@@ -35,7 +35,7 @@ def relu(Z):
     
     A = np.maximum(0,Z)
     
-    assert(A.shape == Z.shape)
+    assert (A.shape == Z.shape)
     
     cache = Z 
     return A, cache
@@ -347,9 +347,9 @@ def L_model_backward(AL, Y, caches):
              grads["db" + str(l)] = ... 
     """
     grads = {}
-    L = len(caches) # the number of layers
+    L = len(caches)  # the number of layers
     m = AL.shape[1]
-    Y = Y.reshape(AL.shape) # after this line, Y is the same shape as AL
+    Y = Y.reshape(AL.shape)  # after this line, Y is the same shape as AL
     
     # Initializing the backpropagation
     dAL = - (np.divide(Y, AL) - np.divide(1 - Y, 1 - AL))
@@ -383,7 +383,7 @@ def update_parameters(parameters, grads, learning_rate):
                   parameters["b" + str(l)] = ...
     """
     
-    L = len(parameters) // 2 # number of layers in the neural network
+    L = len(parameters) // 2  # number of layers in the neural network
 
     # Update rule for each parameter. Use a for loop.
     for l in range(L):
@@ -406,7 +406,7 @@ def predict(X, y, parameters):
     """
     
     m = X.shape[1]
-    n = len(parameters) // 2 # number of layers in the neural network
+    n = len(parameters) // 2  # number of layers in the neural network
     p = np.zeros((1,m))
     
     # Forward propagation
@@ -420,10 +420,10 @@ def predict(X, y, parameters):
         else:
             p[0,i] = 0
     
-    #print results
-    #print ("predictions: " + str(p))
-    #print ("true labels: " + str(y))
-    print("Accuracy: "  + str(np.sum((p == y)/m)))
+    # print results
+    # print ("predictions: " + str(p))
+    # print ("true labels: " + str(y))
+    print("Accuracy: " + str(np.sum((p == y)/m)))
         
     return p
 
@@ -437,7 +437,7 @@ def print_mislabeled_images(classes, X, y, p):
     """
     a = p + y
     mislabeled_indices = np.asarray(np.where(a == 1))
-    plt.rcParams['figure.figsize'] = (40.0, 40.0) # set default size of plots
+    plt.rcParams['figure.figsize'] = (40.0, 40.0)  # set default size of plots
     num_images = len(mislabeled_indices[0])
     for i in range(num_images):
         index = mislabeled_indices[1][i]
