@@ -29,7 +29,7 @@ def relu(x):
     Return:
     s -- relu(x)
     """
-    s = np.maximum(0,x)
+    s = np.maximum(0, x)
     
     return s
 
@@ -37,16 +37,16 @@ def load_planar_dataset(seed):
     
     np.random.seed(seed)
     
-    m = 400 # number of examples
+    m = 400  # number of examples
     N = int(m/2) # number of points per class
-    D = 2 # dimensionality
-    X = np.zeros((m,D)) # data matrix where each row is a single example
-    Y = np.zeros((m,1), dtype='uint8') # labels vector (0 for red, 1 for blue)
-    a = 4 # maximum ray of the flower
+    D = 2    # dimensionality
+    X = np.zeros((m,D))  # data matrix where each row is a single example
+    Y = np.zeros((m,1), dtype='uint8')  # labels vector (0 for red, 1 for blue)
+    a = 4    # maximum ray of the flower
 
     for j in range(2):
         ix = range(N*j,N*(j+1))
-        t = np.linspace(j*3.12,(j+1)*3.12,N) + np.random.randn(N)*0.2 # theta
+        t = np.linspace(j*3.12,(j+1)*3.12,N) + np.random.randn(N)*0.2  # theta
         r = a*np.sin(4*t) + np.random.randn(N)*0.2 # radius
         X[ix] = np.c_[r*np.sin(t), r*np.cos(t)]
         Y[ix] = j
@@ -84,7 +84,6 @@ def initialize_parameters(layer_dims):
         
         assert(parameters['W' + str(l)].shape == layer_dims[l], layer_dims[l-1])
         assert(parameters['W' + str(l)].shape == layer_dims[l], 1)
-
         
     return parameters
 
@@ -143,17 +142,17 @@ def backward_propagation(X, Y, cache):
     
     dZ3 = A3 - Y
     dW3 = 1./m * np.dot(dZ3, A2.T)
-    db3 = 1./m * np.sum(dZ3, axis=1, keepdims = True)
+    db3 = 1./m * np.sum(dZ3, axis=1, keepdims=True)
     
     dA2 = np.dot(W3.T, dZ3)
     dZ2 = np.multiply(dA2, np.int64(A2 > 0))
     dW2 = 1./m * np.dot(dZ2, A1.T)
-    db2 = 1./m * np.sum(dZ2, axis=1, keepdims = True)
+    db2 = 1./m * np.sum(dZ2, axis=1, keepdims=True)
     
     dA1 = np.dot(W2.T, dZ2)
     dZ1 = np.multiply(dA1, np.int64(A1 > 0))
     dW1 = 1./m * np.dot(dZ1, X.T)
-    db1 = 1./m * np.sum(dZ1, axis=1, keepdims = True)
+    db1 = 1./m * np.sum(dZ1, axis=1, keepdims=True)
     
     gradients = {"dZ3": dZ3, "dW3": dW3, "db3": db3,
                  "dA2": dA2, "dZ2": dZ2, "dW2": dW2, "db2": db2,
@@ -178,7 +177,7 @@ def update_parameters(parameters, grads, learning_rate):
     parameters -- python dictionary containing your updated parameters 
     """
     
-    n = len(parameters) // 2 # number of layers in the neural networks
+    n = len(parameters) // 2  # number of layers in the neural networks
 
     # Update rule for each parameter
     for k in range(n):
@@ -214,8 +213,8 @@ def predict(X, y, parameters):
 
     # print results
 
-    #print ("predictions: " + str(p[0,:]))
-    #print ("true labels: " + str(y[0,:]))
+    # print("predictions: " + str(p[0,:]))
+    # print("true labels: " + str(y[0,:]))
     print("Accuracy: "  + str(np.mean((p[0,:] == y[0,:]))))
     
     return p
@@ -283,21 +282,21 @@ def load_planar_dataset(randomness, seed):
     np.random.seed(seed)
     
     m = 50
-    N = int(m/2) # number of points per class
-    D = 2 # dimensionality
-    X = np.zeros((m,D)) # data matrix where each row is a single example
-    Y = np.zeros((m,1), dtype='uint8') # labels vector (0 for red, 1 for blue)
-    a = 2 # maximum ray of the flower
+    N = int(m/2)  # number of points per class
+    D = 2  # dimensionality
+    X = np.zeros((m,D))  # data matrix where each row is a single example
+    Y = np.zeros((m,1), dtype='uint8')  # labels vector (0 for red, 1 for blue)
+    a = 2  # maximum ray of the flower
 
     for j in range(2):
         
         ix = range(N*j,N*(j+1))
         if j == 0:
-            t = np.linspace(j, 4*3.1415*(j+1),N) #+ np.random.randn(N)*randomness # theta
-            r = 0.3*np.square(t) + np.random.randn(N)*randomness # radius
+            t = np.linspace(j, 4*3.1415*(j+1), N)  #+ np.random.randn(N)*randomness # theta
+            r = 0.3*np.square(t) + np.random.randn(N)*randomness  # radius
         if j == 1:
-            t = np.linspace(j, 2*3.1415*(j+1),N) #+ np.random.randn(N)*randomness # theta
-            r = 0.2*np.square(t) + np.random.randn(N)*randomness # radius
+            t = np.linspace(j, 2*3.1415*(j+1), N)  #+ np.random.randn(N)*randomness # theta
+            r = 0.2*np.square(t) + np.random.randn(N)*randomness  # radius
             
         X[ix] = np.c_[r*np.cos(t), r*np.sin(t)]
         Y[ix] = j
@@ -309,8 +308,8 @@ def load_planar_dataset(randomness, seed):
 
 def plot_decision_boundary(model, X, y):
     # Set min and max values and give it some padding
-    x_min, x_max = X[0, :].min() - 1, X[0, :].max() + 1
-    y_min, y_max = X[1, :].min() - 1, X[1, :].max() + 1
+    x_min, x_max = X[0,:].min() - 1, X[0,:].max() + 1
+    y_min, y_max = X[1,:].min() - 1, X[1,:].max() + 1
     h = 0.01
     # Generate a grid of points with distance h between them
     xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
@@ -321,7 +320,7 @@ def plot_decision_boundary(model, X, y):
     plt.contourf(xx, yy, Z, cmap=plt.cm.Spectral)
     plt.ylabel('x2')
     plt.xlabel('x1')
-    plt.scatter(X[0, :], X[1, :], c=y, cmap=plt.cm.Spectral)
+    plt.scatter(X[0,:], X[1,:], c=y, cmap=plt.cm.Spectral)
     plt.show()
     
 def load_2D_dataset():
@@ -331,6 +330,6 @@ def load_2D_dataset():
     test_X = data['Xval'].T
     test_Y = data['yval'].T
 
-    plt.scatter(train_X[0, :], train_X[1, :], c=train_Y, s=40, cmap=plt.cm.Spectral);
+    plt.scatter(train_X[0,:], train_X[1,:], c=train_Y, s=40, cmap=plt.cm.Spectral)
     
     return train_X, train_Y, test_X, test_Y
