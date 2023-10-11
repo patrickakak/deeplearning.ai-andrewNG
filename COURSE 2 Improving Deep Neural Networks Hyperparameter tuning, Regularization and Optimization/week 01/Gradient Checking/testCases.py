@@ -17,5 +17,4 @@ def gradient_check_n_test_case():
                   "W3": W3,
                   "b3": b3}
 
-    
     return x, y, parameters
