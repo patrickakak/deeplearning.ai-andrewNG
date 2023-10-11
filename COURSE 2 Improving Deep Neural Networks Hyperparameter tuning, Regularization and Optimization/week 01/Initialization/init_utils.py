@@ -27,7 +27,7 @@ def relu(x):
     Return:
     s -- relu(x)
     """
-    s = np.maximum(0,x)
+    s = np.maximum(0, x)
     
     return s
 
@@ -197,7 +197,7 @@ def predict(X, y, parameters):
             p[0,i] = 0
 
     # print results
-    print("Accuracy: "  + str(np.mean((p[0,:] == y[0,:]))))
+    print("Accuracy: " + str(np.mean((p[0,:] == y[0,:]))))
     
     return p
 
@@ -232,7 +232,7 @@ def predict_dec(parameters, X):
     
     # Predict using forward propagation and a classification threshold of 0.5
     a3, cache = forward_propagation(X, parameters)
-    predictions = (a3>0.5)
+    predictions = (a3 > 0.5)
     return predictions
 
 def load_dataset():
@@ -241,7 +241,7 @@ def load_dataset():
     np.random.seed(2)
     test_X, test_Y = sklearn.datasets.make_circles(n_samples=100, noise=.05)
     # Visualize the data
-    plt.scatter(train_X[:,0], train_X[:,1], c=train_Y, s=40, cmap=plt.cm.Spectral);
+    plt.scatter(train_X[:,0], train_X[:,1], c=train_Y, s=40, cmap=plt.cm.Spectral)
     train_X = train_X.T
     train_Y = train_Y.reshape((1, train_Y.shape[0]))
     test_X = test_X.T
