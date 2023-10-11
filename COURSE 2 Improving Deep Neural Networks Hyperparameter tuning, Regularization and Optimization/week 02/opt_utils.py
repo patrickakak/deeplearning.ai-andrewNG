@@ -28,7 +28,7 @@ def relu(x):
     Return:
     s -- relu(x)
     """
-    s = np.maximum(0,x)
+    s = np.maximum(0, x)
     
     return s
 
@@ -67,10 +67,10 @@ def initialize_parameters(layer_dims):
     
     np.random.seed(3)
     parameters = {}
-    L = len(layer_dims) # number of layers in the network
+    L = len(layer_dims)  # number of layers in the network
 
     for l in range(1, L):
-        parameters['W' + str(l)] = np.random.randn(layer_dims[l], layer_dims[l-1])*  np.sqrt(2 / layer_dims[l-1])
+        parameters['W' + str(l)] = np.random.randn(layer_dims[l], layer_dims[l-1])*  np.sqrt(2./layer_dims[l-1])
         parameters['b' + str(l)] = np.zeros((layer_dims[l], 1))
         
         assert(parameters['W' + str(l)].shape == layer_dims[l], layer_dims[l-1])
@@ -93,7 +93,7 @@ def compute_cost(a3, Y):
     """
     m = Y.shape[1]
     
-    logprobs = np.multiply(-np.log(a3),Y) + np.multiply(-np.log(1 - a3), 1 - Y)
+    logprobs = np.multiply(-np.log(a3), Y) + np.multiply(-np.log(1 - a3), 1 - Y)
     cost = 1./m * np.sum(logprobs)
     
     return cost
@@ -153,17 +153,17 @@ def backward_propagation(X, Y, cache):
     
     dz3 = 1./m * (a3 - Y)
     dW3 = np.dot(dz3, a2.T)
-    db3 = np.sum(dz3, axis=1, keepdims = True)
+    db3 = np.sum(dz3, axis=1, keepdims=True)
     
     da2 = np.dot(W3.T, dz3)
     dz2 = np.multiply(da2, np.int64(a2 > 0))
     dW2 = np.dot(dz2, a1.T)
-    db2 = np.sum(dz2, axis=1, keepdims = True)
+    db2 = np.sum(dz2, axis=1, keepdims=True)
     
     da1 = np.dot(W2.T, dz2)
     dz1 = np.multiply(da1, np.int64(a1 > 0))
     dW1 = np.dot(dz1, X.T)
-    db1 = np.sum(dz1, axis=1, keepdims = True)
+    db1 = np.sum(dz1, axis=1, keepdims=True)
     
     gradients = {"dz3": dz3, "dW3": dW3, "db3": db3,
                  "da2": da2, "dz2": dz2, "dW2": dW2, "db2": db2,
@@ -198,10 +198,9 @@ def predict(X, y, parameters):
             p[0,i] = 0
 
     # print results
-
-    #print ("predictions: " + str(p[0,:]))
-    #print ("true labels: " + str(y[0,:]))
-    print("Accuracy: "  + str(np.mean((p[0,:] == y[0,:]))))
+    # print ("predictions: " + str(p[0,:]))
+    # print ("true labels: " + str(y[0,:]))
+    print("Accuracy: " + str(np.mean((p[0,:] == y[0,:]))))
     
     return p
 
@@ -212,14 +211,14 @@ def load_2D_dataset():
     test_X = data['Xval'].T
     test_Y = data['yval'].T
 
-    plt.scatter(train_X[0, :], train_X[1, :], c=train_Y, s=40, cmap=plt.cm.Spectral);
+    plt.scatter(train_X[0,:], train_X[1,:], c=train_Y, s=40, cmap=plt.cm.Spectral)
     
     return train_X, train_Y, test_X, test_Y
 
 def plot_decision_boundary(model, X, y):
     # Set min and max values and give it some padding
-    x_min, x_max = X[0, :].min() - 1, X[0, :].max() + 1
-    y_min, y_max = X[1, :].min() - 1, X[1, :].max() + 1
+    x_min, x_max = X[0,:].min() - 1, X[0,:].max() + 1
+    y_min, y_max = X[1,:].min() - 1, X[1,:].max() + 1
     h = 0.01
     # Generate a grid of points with distance h between them
     xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
@@ -230,7 +229,7 @@ def plot_decision_boundary(model, X, y):
     plt.contourf(xx, yy, Z, cmap=plt.cm.Spectral)
     plt.ylabel('x2')
     plt.xlabel('x1')
-    plt.scatter(X[0, :], X[1, :], c=y, cmap=plt.cm.Spectral)
+    plt.scatter(X[0,:], X[1,:], c=y, cmap=plt.cm.Spectral)
     plt.show()
     
 def predict_dec(parameters, X):
@@ -254,7 +253,7 @@ def load_dataset():
     np.random.seed(3)
     train_X, train_Y = sklearn.datasets.make_moons(n_samples=300, noise=.2) #300 #0.2 
     # Visualize the data
-    plt.scatter(train_X[:, 0], train_X[:, 1], c=train_Y, s=40, cmap=plt.cm.Spectral);
+    plt.scatter(train_X[:,0], train_X[:,1], c=train_Y, s=40, cmap=plt.cm.Spectral)
     train_X = train_X.T
     train_Y = train_Y.reshape((1, train_Y.shape[0]))
     
