@@ -106,6 +106,7 @@ def draw_boxes(image, boxes, box_classes, class_names, scores=None):
             label = '{}'.format(box_class)
 
         draw = ImageDraw.Draw(image)
+        # https://stackoverflow.com/questions/76189891/imagedraw-object-has-no-attribute-textbbox
         # label_size = draw.textsize(label, font)
         label_size = draw.textbbox((0,0), label, font)
 
@@ -130,6 +131,7 @@ def draw_boxes(image, boxes, box_classes, class_names, scores=None):
             draw.rectangle(
                 [left + i, top + i, right - i, bottom - i], outline=colors[c])
         draw.rectangle(
+            # [tuple(text_origin), tuple(text_origin + label_size)],
             [tuple(text_origin), tuple(text_origin + label_size[2:])],
             fill=colors[c])
         draw.text(text_origin, label, fill=(0, 0, 0), font=font)
